@@ -59,10 +59,7 @@ if my_prompt := st.chat_input("Escribe tu mensaje..."):
     # Agregar mensaje del usuario al historial del chat
     st.session_state.messages.append({"role": "user", "content": my_prompt})
     messages.append(["human", my_prompt])
-    try:
-        vectorstore = Chroma(persist_directory="./chroma_db", embedding_function=embeddings)
-    except Exception as e:
-        print(e)
+    vectorstore = Chroma(persist_directory="./chroma_db", embedding_function=embeddings)
     resultados_similares = vectorstore.similarity_search(my_prompt, k=10) # Probar con k=10
     print(len(resultados_similares))
     contexto=""

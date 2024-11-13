@@ -51,7 +51,7 @@ def ollama_install():
         command="ollama serve"
         command=shlex.split(command)
         process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-        print(process.stdout)
+        #print(process.stdout)
         print("ollama serve")
 
         #ollama pull llama3.1:8b

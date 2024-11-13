@@ -1,5 +1,5 @@
 cloud-init
 command-not-found
 pkg-config
-libdbus-1-dev 
-libdbus-glib-1-dbus
+libdbus-glib-1-2
+libdbus-glib-1-dev

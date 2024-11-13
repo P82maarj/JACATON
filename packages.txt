@@ -4,3 +4,4 @@ pkg-config
 libdbus-glib-1-2
 libdbus-glib-1-dev
 distro-info
+libcairo2-dev

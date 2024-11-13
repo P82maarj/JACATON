@@ -53,6 +53,7 @@ def ollama_install():
         print("ollama already active")
 ollama_install()
 
+print("ollama -v")
 #ollama pull llama3.1:8b
 command="sudo ollama serve"
 command=shlex.split(command)

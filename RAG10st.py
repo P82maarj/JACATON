@@ -11,6 +11,8 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain.chains import LLMChain
 from langchain_huggingface import HuggingFaceEmbeddings
 import os
+import subprocess
+import shlex
 import streamlit as st
 
 
@@ -18,6 +20,38 @@ SYSTEM_PROMPT = """You are Talos, a highly trained artificial intelligence assis
 Your goal is to provide clear, precise and useful answers to users' and clients' questions and concerns. 
 You are able to explain technical concepts in a simple and understandable way, and you always stay up to date with the latest trends and advances in the field of medium voltage controllers. 
 Your tone is professional, friendly and respectful."""
+
+
+@st.fragment()
+def ollama_install():
+    command="systemctl is-enabled ollama"
+    command=shlex.split(command)
+    stat = subprocess.run(command)
+    print(stat.returncode)
+    if(stat.returncode !=0):  # if 0 (active), print "Active"
+        # curl -fsSL https://ollama.com/install.sh | sh
+        command="curl -o install.sh -fsSL https://ollama.com/install.sh "
+        command=shlex.split(command)
+        subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        print("ollama downloaded")
+
+        command="./install.sh"
+        command=shlex.split(command)
+        process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        print(process.stdout)
+        print("ollama Installed")
+
+        #ollama pull llama3.1:8b
+        command="ollama pull llama3.1:8b"
+        command=shlex.split(command)
+        process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        print(process.stdout)
+        print("llama3.1:8b downloaded")
+    else:
+        print("ollama already active")
+ollama_install()
+
+
 
 llm = Ollama(model="llama3.1:8b", system=SYSTEM_PROMPT, temperature=0, top_k=1, top_p=1)
 

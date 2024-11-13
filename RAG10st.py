@@ -41,6 +41,13 @@ def ollama_install():
         print(process.stdout)
         print("ollama Installed")
 
+
+        command="export PATH=$PATH:/usr/local/bin"
+        command=shlex.split(command)
+        process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        print(process.stdout)
+        print("ollama Installed")
+
         command="ollama serve"
         command=shlex.split(command)
         process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)

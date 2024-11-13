@@ -8,6 +8,9 @@ from langchain.chains import LLMChain
 from langchain_huggingface import HuggingFaceEmbeddings
 import os
 import streamlit as st
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 SYSTEM_PROMPT = """You are Talos, a highly trained artificial intelligence assistant in the field of medium voltage electrical engineering.
 Your goal is to provide clear, precise and useful answers to users' and clients' questions and concerns. 

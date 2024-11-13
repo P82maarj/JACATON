@@ -7,5 +7,5 @@ distro-info
 libcairo2-dev
 libgirepository1.0-dev
 libsystemd-dev
-sqlite3
+sqlite3=3.45.1-1ubuntu2.1
 libsqlite3-dev

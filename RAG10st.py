@@ -51,13 +51,13 @@ def ollama_install():
         
 
         #ollama pull llama3.1:8b
-        command="/usr/local/ollama pull llama3.1:8b"
+        command="/usr/local/bin/ollama pull llama3.1:8b"
         command=shlex.split(command)
         process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         print(process.stdout)
         print("llama3.1:8b downloaded")
 
-        command="/usr/local/ollama serve"
+        command="/usr/local/bin/ollama serve"
         command=shlex.split(command)
         process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         #print(process.stdout)

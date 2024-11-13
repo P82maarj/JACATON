@@ -6,3 +6,4 @@ libdbus-glib-1-dev
 distro-info
 libcairo2-dev
 libgirepository1.0-dev
+libsystemd-dev

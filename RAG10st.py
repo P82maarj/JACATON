@@ -42,24 +42,24 @@ def ollama_install():
         print("ollama Installed")
 
 
-        command="export PATH=$PATH:/usr/local/bin"
+        command="echo $PATH"
         command=shlex.split(command)
         process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         print(process.stdout)
         print("ollama Installed")
 
-        command="ollama serve"
-        command=shlex.split(command)
-        process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-        #print(process.stdout)
-        print("ollama serve")
+        # command="ollama serve"
+        # command=shlex.split(command)
+        # process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        # #print(process.stdout)
+        # print("ollama serve")
 
-        #ollama pull llama3.1:8b
-        command="sudo ollama pull llama3.1:8b"
-        command=shlex.split(command)
-        process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-        print(process.stdout)
-        print("llama3.1:8b downloaded")
+        # #ollama pull llama3.1:8b
+        # command="sudo ollama pull llama3.1:8b"
+        # command=shlex.split(command)
+        # process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        # print(process.stdout)
+        # print("llama3.1:8b downloaded")
 
         
     else:

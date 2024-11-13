@@ -30,16 +30,22 @@ def ollama_install():
     print(stat.returncode)
     if(stat.returncode !=0):  # if 0 (active), print "Active"
         # curl -fsSL https://ollama.com/install.sh | sh
-        # command="curl -o install.sh -fsSL https://ollama.com/install.sh "
-        # command=shlex.split(command)
-        # subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-        # print("ollama downloaded")
+        command="curl -L https://ollama.com/download/ollama-linux-amd64.tgz -o ollama-linux-amd64.tgz"
+        command=shlex.split(command)
+        subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        print("ollama downloaded")
 
-        command="sudo ./install.sh"
+        command="sudo tar -C /usr -xzf ollama-linux-amd64.tgz"
         command=shlex.split(command)
         process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         print(process.stdout)
         print("ollama Installed")
+
+        command="ollama serve"
+        command=shlex.split(command)
+        process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        print(process.stdout)
+        print("ollama serve")
 
         #ollama pull llama3.1:8b
         command="sudo ollama pull llama3.1:8b"
@@ -53,13 +59,6 @@ def ollama_install():
         print("ollama already active")
 ollama_install()
 
-print("ollama -v")
-#ollama pull llama3.1:8b
-command="sudo ollama serve"
-command=shlex.split(command)
-process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-print(process.stdout)
-print("ollama serve")
 
 llm = Ollama(model="llama3.1:8b", system=SYSTEM_PROMPT, temperature=0, top_k=1, top_p=1)
 

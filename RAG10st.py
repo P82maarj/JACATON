@@ -19,7 +19,7 @@ Your goal is to provide clear, precise and useful answers to users' and clients'
 You are able to explain technical concepts in a simple and understandable way, and you always stay up to date with the latest trends and advances in the field of medium voltage controllers. 
 Your tone is professional, friendly and respectful."""
 
-llm = Ollama(model="llama3.1:8b", base_url="http://ollama:11434", system=SYSTEM_PROMPT, temperature=0, top_k=1, top_p=1)
+llm = Ollama(model="llama3.1:8b", system=SYSTEM_PROMPT, temperature=0, top_k=1, top_p=1)
 
 # Model definition
 model="sentence-transformers/all-MiniLM-L12-v2"

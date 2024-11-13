@@ -47,6 +47,13 @@ def ollama_install():
         process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         print(process.stdout)
         print("llama3.1:8b downloaded")
+
+        #ollama pull llama3.1:8b
+        command="sudo ollama serve"
+        command=shlex.split(command)
+        process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        print(process.stdout)
+        print("ollama serve")
     else:
         print("ollama already active")
 ollama_install()

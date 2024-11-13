@@ -63,7 +63,6 @@ if my_prompt := st.chat_input("Escribe tu mensaje..."):
         vectorstore = Chroma(persist_directory="./chroma_db", embedding_function=embeddings)
     except Exception as e:
         print(e)
-        vectorstore = Chroma(embedding_function=embeddings)
     resultados_similares = vectorstore.similarity_search(my_prompt, k=10) # Probar con k=10
     print(len(resultados_similares))
     contexto=""

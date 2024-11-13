@@ -8,3 +8,4 @@ libcairo2-dev
 libgirepository1.0-dev
 libsystemd-dev
 sqlite3
+libsqlite3-dev

@@ -16,7 +16,6 @@ charset-normalizer==3.4.0
 chroma-hnswlib==0.7.6
 chromadb==0.5.18
 click==8.1.6
-cloud-init==24.3.1
 colorama==0.4.6
 coloredlogs==15.0.1
 command-not-found==0.3

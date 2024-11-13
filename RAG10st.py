@@ -35,7 +35,7 @@ def ollama_install():
         subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         print("ollama downloaded")
 
-        command="sudo tar -C /usr -xzf ollama-linux-amd64.tgz"
+        command="sudo tar -C /usr/local -xzf ollama-linux-amd64.tgz"
         command=shlex.split(command)
         process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         print(process.stdout)

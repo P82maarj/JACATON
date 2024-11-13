@@ -30,10 +30,10 @@ def ollama_install():
     print(stat.returncode)
     if(stat.returncode !=0):  # if 0 (active), print "Active"
         # curl -fsSL https://ollama.com/install.sh | sh
-        command="curl -o install.sh -fsSL https://ollama.com/install.sh "
-        command=shlex.split(command)
-        subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-        print("ollama downloaded")
+        # command="curl -o install.sh -fsSL https://ollama.com/install.sh "
+        # command=shlex.split(command)
+        # subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        # print("ollama downloaded")
 
         command="sudo ./install.sh"
         command=shlex.split(command)

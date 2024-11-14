@@ -1,5 +1,8 @@
 __import__('pysqlite3')
+from asyncio import sleep
 import sys
+import threading
+import time
 
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 from langchain_community.llms import Ollama
@@ -21,6 +24,11 @@ Your goal is to provide clear, precise and useful answers to users' and clients'
 You are able to explain technical concepts in a simple and understandable way, and you always stay up to date with the latest trends and advances in the field of medium voltage controllers. 
 Your tone is professional, friendly and respectful."""
 
+def serve():
+    command="/usr/local/bin/ollama serve"
+    command=shlex.split(command)
+    process=subprocess.call(command)
+    print("ollama serve")
 
 @st.fragment()
 def ollama_install():
@@ -35,26 +43,25 @@ def ollama_install():
         subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         print("ollama downloaded")
 
-        command="sudo tar -C /usr/local -xzf ollama-linux-amd64.tgz && /usr/local/bin/ollama serve"
+        command="sudo tar -C /usr/local -xzf ollama-linux-amd64.tgz"
         command=shlex.split(command)
         process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         print(process.stdout)
         print("ollama Installed")
 
-
+        x = threading.Thread(target=serve ,daemon=True)
+        x.start()
+        time.sleep(10)
         # command="export PATH=$PATH:/usr/local/bin"
         # command=shlex.split(command)
         # process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         # print(process.stdout)
         # print("ollama Installed")
 
-        command="/usr/local/bin/ollama serve"
-        command=shlex.split(command)
-        process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-        #print(process.stdout)
-        print("ollama serve")
+
 
         #ollama pull llama3.1:8b
+        print("llama3.1:8b download")
         command="/usr/local/bin/ollama pull llama3.1:8b"
         command=shlex.split(command)
         process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)

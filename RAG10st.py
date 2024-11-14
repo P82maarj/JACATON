@@ -24,20 +24,20 @@ Your goal is to provide clear, precise and useful answers to users' and clients'
 You are able to explain technical concepts in a simple and understandable way, and you always stay up to date with the latest trends and advances in the field of medium voltage controllers. 
 Your tone is professional, friendly and respectful."""
 
-def download():
+def tdownload():
     command="curl -L https://ollama.com/download/ollama-linux-amd64.tgz -o ollama-linux-amd64.tgz"
     command=shlex.split(command)
     subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
     print("ollama downloaded")
 
-def decompress():
+def tdecompress():
     command="sudo tar -C . -xzf ollama-linux-amd64.tgz"
     command=shlex.split(command)
     process=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
     print(process.stdout)
     print("ollama Installed")
 
-def serve():
+def tserve():
     command="bin/ollama serve"
     command=shlex.split(command)
     process=subprocess.call(command)
@@ -51,16 +51,16 @@ def ollama_install():
     print(stat.returncode)
     if(stat.returncode !=0):  # if 0 (active), print "Active"
         # curl -fsSL https://ollama.com/install.sh | sh
-        download = threading.Thread(target=download ,daemon=True)
-        download.start()
-        download.join()
+        downloadT = threading.Thread(target=tdownload ,daemon=True)
+        downloadT.start()
+        downloadT.join()
 
-        decompress = threading.Thread(target=decompress ,daemon=True)
-        decompress.start()
-        decompress.join()
+        decompressT = threading.Thread(target=tdecompress ,daemon=True)
+        decompressT.start()
+        decompressT.join()
 
-        serve = threading.Thread(target=serve ,daemon=True)
-        serve.start()
+        serveT = threading.Thread(target=tserve ,daemon=True)
+        serveT.start()
         time.sleep(10)
         # command="export PATH=$PATH:/usr/local/bin"
         # command=shlex.split(command)

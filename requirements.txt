@@ -1,4 +1,4 @@
-pysqlite3-binary==0.5.4
+#pysqlite3-binary==0.5.4 #if sqlite3<3.35.0
 chromadb
 streamlit
 langchain-chroma

@@ -1,10 +1,12 @@
-__import__('pysqlite3')
-from asyncio import sleep
-import sys
-import threading
-import time
+# __import__('pysqlite3')
+# from asyncio import sleep
+# import sys
+# import threading
+# import time
+# import timeit
 
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+# sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+import time
 from langchain_community.llms import Ollama
 from langchain_chroma import Chroma
 from langchain_community.document_loaders import DirectoryLoader, UnstructuredFileLoader
@@ -17,6 +19,7 @@ import os
 import subprocess
 import shlex
 import streamlit as st
+import timeit
 
 
 SYSTEM_PROMPT = """You are Talos, a highly trained artificial intelligence assistant in the field of medium voltage electrical engineering.
@@ -51,9 +54,9 @@ def ollama_install():
     print(stat.returncode)
     if(stat.returncode !=0):  # if 0 (active), print "Active"
         # curl -fsSL https://ollama.com/install.sh | sh
-        downloadT = threading.Thread(target=tdownload ,daemon=True)
-        downloadT.start()
-        downloadT.join()
+        # downloadT = threading.Thread(target=tdownload ,daemon=True)
+        # downloadT.start()
+        # downloadT.join()
 
         decompressT = threading.Thread(target=tdecompress ,daemon=True)
         decompressT.start()
@@ -83,7 +86,7 @@ def ollama_install():
         
     else:
         print("ollama already active")
-ollama_install()
+#ollama_install()
 
 
 llm = Ollama(model="llama3.1:8b", system=SYSTEM_PROMPT, temperature=0, top_k=1, top_p=1)
@@ -121,10 +124,12 @@ for message in st.session_state.messages:
 
 # Reaccionar a la entrada del usuario
 if my_prompt := st.chat_input("Escribe tu mensaje..."):
+    startt = time.time()
     # Mostrar mensaje del usuario en el contenedor de mensajes del chat
     st.chat_message("user").markdown(my_prompt)
     # Agregar mensaje del usuario al historial del chat
     st.session_state.messages.append({"role": "user", "content": my_prompt})
+
     messages.append(["human", my_prompt])
     vectorstore = Chroma(persist_directory="./chroma_db", embedding_function=embeddings)
     resultados_similares = vectorstore.similarity_search(my_prompt, k=10) # Probar con k=10
@@ -134,9 +139,11 @@ if my_prompt := st.chat_input("Escribe tu mensaje..."):
         contexto += doc.page_content
     respuesta = qa_chain.invoke({"question": my_prompt, "context": contexto})
     resultado = respuesta
+    endt = time.time()
     # Mostrar respuesta del asistente en el contenedor de mensajes del chat
     with st.chat_message("assistant"):
-        st.markdown(resultado)
+        elapsed=endt-startt
+        st.markdown(str(round(elapsed, 2)) + ": " + resultado)
     # Agregar respuesta del asistente al historial de chat
     st.session_state.messages.append({"role": "assistant", "content": resultado})
 
